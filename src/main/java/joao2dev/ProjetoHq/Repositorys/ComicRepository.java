@@ -16,5 +16,5 @@ public interface ComicRepository extends JpaRepository<ComicModel , Long> {
     WHERE c.idHQ = :id
 """)
     Optional<ComicModel> buscarCompleto(@Param("id") Long id);
-    List<ComicModel> findByTituloHq(String nomePersonagem);
+    List<ComicModel> findByTituloHqContainingIgnoreCase(String nomePersonagem);
 }
