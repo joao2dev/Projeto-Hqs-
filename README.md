@@ -115,7 +115,7 @@ spring.h2.console.path=/h2-console
 ```
 
 ---
-#video explicando melhor como configurar variaveis de ambiente:
+## video explicando melhor como configurar variaveis de ambiente:
 https://youtu.be/GyaE1-vbjf4?si=aY5hJ3Dbx1UGtGNI
 
 # ▶️ Como Executar o Projeto(Intellig Idea recomendado)
