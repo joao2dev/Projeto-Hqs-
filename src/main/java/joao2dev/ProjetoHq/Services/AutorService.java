@@ -2,6 +2,7 @@ package joao2dev.ProjetoHq.Services;
 
 import joao2dev.ProjetoHq.Repositorys.AutorRepository;
 import joao2dev.ProjetoHq.Revista.AutorModel;
+import joao2dev.ProjetoHq.Revista.CharacterModel;
 import joao2dev.ProjetoHq.dto.AutorRequestDTO;
 import joao2dev.ProjetoHq.dto.AutorResponseDTO;
 import joao2dev.ProjetoHq.mapstruct.AutorMapper;
@@ -20,7 +21,9 @@ public class AutorService {
 
     //    Criar autor
     public AutorResponseDTO criarAutor(AutorRequestDTO autorModel){
-        return mapper.paraAutorResponseDTO(autorRepository.save(mapper.paraAutorModel(autorModel)));
+        AutorModel autor = autorRepository.save(mapper.paraAutorModel(autorModel));
+        validar(autor);
+        return mapper.paraAutorResponseDTO(autor);
 
     }
 //   Listar autores
@@ -49,4 +52,8 @@ public class AutorService {
    public List<AutorResponseDTO> buscarAutor(String nome){
         return mapper.paraListarAutorResponse(autorRepository.findByNomeIgnoreCase(nome));
     }
+    void validar(AutorModel model){
+        if (model.getNome() == null){
+            throw new RuntimeException("Nome do Personagem obrigatorio");
+        }}
 }

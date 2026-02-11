@@ -12,7 +12,7 @@ import java.util.List;
 public class ComicRequestDTO {
     private Long id;
     private String tituloHq;
-    private int anoLancamento;
+    private int anolancamento;
     private int edicao;
     private String genero;
     private String sinopse;

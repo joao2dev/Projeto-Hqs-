@@ -3,6 +3,8 @@ package joao2dev.ProjetoHq.Controller;
 
 import joao2dev.ProjetoHq.Revista.PublisherModel;
 import joao2dev.ProjetoHq.Services.PublisherService;
+import joao2dev.ProjetoHq.dto.PublisherRequestDTO;
+import joao2dev.ProjetoHq.dto.PublisherResponseDTO;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,19 +19,19 @@ public class PublisherController {
     }
 
     @GetMapping("/listar")
-    public List<PublisherModel> mostrarEditoras(){
+    public List<PublisherResponseDTO> mostrarEditoras(){
         return publisherService.mostrarEditoras();
     }
     @GetMapping("/lista/{id}")
-    public PublisherModel mostrarPorId(@PathVariable Long id){
+    public PublisherResponseDTO mostrarPorId(@PathVariable Long id){
         return publisherService.mostrarEditoraPorId(id);
     }
     @PostMapping("/adicionar")
-    public PublisherModel adicionar(@RequestBody PublisherModel publisherModel){
+    public PublisherResponseDTO adicionar(@RequestBody PublisherRequestDTO publisherModel){
         return publisherService.adicionarEditora(publisherModel);
     }
     @PutMapping("/editar/{id}")
-        public PublisherModel editarEditora(@PathVariable Long id, @RequestBody PublisherModel publisherModel){
+        public PublisherResponseDTO editarEditora(@PathVariable Long id, @RequestBody PublisherRequestDTO publisherModel){
             return publisherService.editarById(id,publisherModel);
         }
 
@@ -37,9 +39,9 @@ public class PublisherController {
         public void deletarById(@PathVariable Long id){
          publisherService.deletarById(id);
     }
- /*   @GetMapping("/buscar/{nome}")
-    public List<PublisherModel> buscarEditora(@PathVariable String nome){
+    @GetMapping("/buscar/{nome}")
+    public List<PublisherResponseDTO> buscarEditora(@PathVariable String nome){
         return publisherService.buscarEditora(nome);
-    }*/
+    }
 
 }
