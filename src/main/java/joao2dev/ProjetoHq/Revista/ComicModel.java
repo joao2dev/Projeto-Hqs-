@@ -1,67 +1,46 @@
 package joao2dev.ProjetoHq.Revista;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "tb_Comics")
+@Table(name = "comic")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 public class ComicModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    Long idHQ;
+    private Long id;
 
-    @Column(name = "titulo")
-    String tituloHq;
+    private String tituloHq;
+    private Integer anolancamento;
+    private int edicao;
+    private String genero;
+    private String sinopse;
+    private String registrocriacao;
+    private String imgUrl;
 
-    @Column(name = "ano_lancamento")
-    int anoDeLancamentoHq;
-
-    @Column(name = "edicao")
-    int edicaoHq;
-
-    @Column(name = "genero")
-    String generoHq;
-
-    @Column(name = "sinopse")
-    String sinopseHq;
-
-    @Column(name = "registro")
-    String registroDeCriacaoHq;
-
-    // HQ → EDITORA
-    @ManyToOne
-    @JoinColumn(name = "editora_id")
-    private PublisherModel editora;
-
-    // HQ ↔ AUTORES
-    @ManyToMany
-    @JoinTable(
-            name = "hq_autores",
-            joinColumns = @JoinColumn(name = "hq_id"),
-            inverseJoinColumns = @JoinColumn(name = "autor_id")
+    @ElementCollection
+    @CollectionTable(
+            name = "COMIC_AUTORES",
+            joinColumns = @JoinColumn(name = "comic_id")
     )
-    @JsonIgnoreProperties("revista")
-    private List<AutorModel> autores = new ArrayList<>();
+    @Column(name = "autor_nome")
+    private List<String> autores;
 
-    // HQ ↔ PERSONAGENS
-    @ManyToMany
-    @JoinTable(
-            name = "hq_personagens",
-            joinColumns = @JoinColumn(name = "hq_id"),
-            inverseJoinColumns = @JoinColumn(name = "personagem_id")
+    @ElementCollection
+    @CollectionTable(
+            name = "COMIC_PERSONAGENS",
+            joinColumns = @JoinColumn(name = "comic_id")
     )
+    @Column(name = "personagem_nome")
+    private List<String> personagens;
 
-    private List<CharacterModel> personagens ;
+    private String nomeEditora;
 }
